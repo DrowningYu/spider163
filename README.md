@@ -1,4 +1,7 @@
 # spider163
+
+视频展示效果 https://www.bilibili.com/video/BV1uJtPe9E1Q/
+
 AE脚本-爬取网易云歌词，输出成AE合成中的文字图层
 
 

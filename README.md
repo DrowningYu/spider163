@@ -4,8 +4,11 @@ AE脚本-爬取网易云歌词，输出成AE合成中的文字图层
 
 需要安装python3
 以及
+
 pip install requests
+
 pip install beautifulsoup4
+
 pip install lxml
 
 

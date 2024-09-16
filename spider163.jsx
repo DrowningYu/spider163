@@ -56,7 +56,36 @@ var scriptFolder = scriptFile.parent;
 
 
 
+    function customDecodeURIComponent(encodedString) {
+        var decodedString = ""; // 存储解码后的结果
+        var i = 0; // 字符串遍历指针
+    
+        while (i < encodedString.length) {
+            var currentChar = encodedString[i]; // 将 'char' 改为 'currentChar'
+    
+            // 如果遇到百分号 %，则表示接下来是两个十六进制数字
+            if (currentChar === '%') {
+                var hexCode = encodedString.substr(i + 1, 2); // 取出两个十六进制数字
+                var decodedChar = String.fromCharCode(parseInt(hexCode, 16)); // 将十六进制转成字符
+                decodedString += decodedChar;
+                i += 3; // 跳过 "%xx" 的三个字符
+            } else {
+                decodedString += currentChar; // 如果不是百分号，直接加入结果
+                i++;
+            }
+        }
+    
+        return decodedString; // 返回解码后的字符串
+    }
 
+
+
+// 处理 Unicode 字符串中的 \uXXXX 格式
+function decodeUnicodeString(unicodeString) {
+    return unicodeString.replace(/\\u[\dA-F]{4}/gi, function (match) {
+        return String.fromCharCode(parseInt(match.replace('\\u', ''), 16));
+    });
+}
 
 function apply(){
 
@@ -191,9 +220,21 @@ function song(id,user_id,flag,floder_path){
     // alert("2"+song_py_path+' '+id+' '+flag+' '+floder_path);
     var en_data = system.callSystem(command);
     // alert("3"+en_data);
-    var de_data = decodeURIComponent(en_data);
+    
+    // var de_data = decodeURIComponent(en_data);
+
+    var de_data=customDecodeURIComponent(en_data);
+
     // alert("4"+de_data);
-    var data=JSON.parse(de_data);
+
+    var de_string = decodeUnicodeString(de_data);
+
+    // alert("4.5"+de_string);
+    
+    // var data=JSON.parse("" + de_string + "");
+
+    var data=eval('(' + de_string + ')')
+
     // alert("5")
     var song_comp=creat_song_comp(data);
     // alert("6");

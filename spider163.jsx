@@ -178,7 +178,7 @@ function get_id(link){
 
 function playlist(id,user_id,flag,floder_path){
     var playlist_py_path=scriptFolder.fsName+'\\spider163\\playlist.py';
-    var command='python '+playlist_py_path+' '+id+' '+flag+' '+floder_path;
+    var command='python "'+playlist_py_path+'" '+id+' '+flag+' "'+floder_path+'"';
     var en_data = system.callSystem(command);
     var de_data = decodeURIComponent(en_data);
     var data=JSON.parse(de_data);
@@ -194,7 +194,7 @@ function album(id,user_id,flag,floder_path){
 
     var album_py_path=scriptFolder.fsName+'\\spider163\\album.py';
 
-    var command='python '+album_py_path+' '+id+' '+flag+' '+floder_path;
+    var command='python "'+album_py_path+'" '+id+' '+flag+' "'+floder_path+'"';
 
     var en_data = system.callSystem(command);
 
@@ -216,7 +216,7 @@ function song(id,user_id,flag,floder_path){
     var song_py_path=scriptFolder.fsName+'\\spider163\\song.py';
     // alert('D:/\Adobe/\AE_script/\spider163/\song.py');
     // alert(song_py_path);
-    var command = 'python '+song_py_path+' '+id+' '+flag+' '+floder_path;
+    var command = 'python "'+song_py_path+'" '+id+' '+flag+' "'+floder_path+'"';
     // alert("2"+song_py_path+' '+id+' '+flag+' '+floder_path);
     var en_data = system.callSystem(command);
     // alert("3"+en_data);
